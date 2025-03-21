@@ -29,7 +29,7 @@ export const useAuthStore = defineStore("auth", {
 
         async logout() {
             try {
-                await axios.post('/api/logout', {}, {
+                await axios.post('/logout', {}, {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
             } catch (error) {

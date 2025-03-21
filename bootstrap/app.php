@@ -1,8 +1,11 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Jobs\ProcessScheduledPosts;
 use Illuminate\Foundation\Application;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
