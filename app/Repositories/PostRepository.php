@@ -12,7 +12,9 @@ class PostRepository
 
     public function getUserPosts($filters = [])
     {
-        return Cache::remember('user_posts_' . Auth::id(), now()->addMinutes(5), function () use ($filters) {
+        $cacheKey = 'user_posts_' . Auth::id();
+        Cache::forget($cacheKey);
+        return Cache::remember($cacheKey, now()->addMinutes(5), function () use ($filters) {
             return Post::where('user_id', Auth::id())
                 ->with(['platforms' => function ($query) {
                     $query->select('platforms.id', 'platforms.name')->without('pivot');
@@ -35,8 +37,10 @@ class PostRepository
         if (request()->hasFile('image_url')) {
             $data['image_url'] = request()->file('image_url')->store('images', 'public');
         }
+
+        $post =  Auth::user()->posts()->create($data);
         Cache::forget('user_posts_' . Auth::id());
-        return Auth::user()->posts()->create($data);
+        return $post;
     }
 
     public function updatePost($post, $data)
