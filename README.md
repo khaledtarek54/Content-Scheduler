@@ -7,7 +7,8 @@ A Laravel-based API for scheduling and managing content across multiple platform
 - **Platform Integration**: Assign posts to different platforms.
 - **Queue & Scheduling**: Processes scheduled posts using Laravel's job queue.
 - **Rate Limiting & Caching**: Protects API endpoints and optimizes performance.
-
+- **Frontend:** Built using Vue.js with TailwindCSS for styling.
+  
 ## Installation
 
 ### Clone the repository:
@@ -49,10 +50,16 @@ POST /api/login
 **Request Body:**
 ```json
 {
-  "email": "user@example.com",
-  "password": "password"
+  "email": "test@example.com",
+  "password": "password123"
 }
 ```
+## Frontend
+- **Framework:** Vue.js
+- **Styling:** TailwindCSS
+- **Component-based architecture:** Ensures reusability and maintainability.
+- **State Management:** Uses pinia for state management.
+- **Toast Notifications:** Provides validation error feedback and status messages.
 
 
 
