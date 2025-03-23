@@ -1,5 +1,6 @@
 # Content Scheduler
 A Laravel-based API for scheduling and managing content across multiple platforms.
+I used `Clean architecture` For structuring my project to enhance maintainability and scalability.
 
 ## Features
 - **Authentication**: Secure API using Laravel Sanctum.
