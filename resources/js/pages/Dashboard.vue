@@ -101,10 +101,6 @@ const logout = async () => {
   router.push('/login')
 }
 
-const editPost = (post) => {
-  alert(`Editing post: ${post.title}`)
-}
-
 const deletePost = (postId) => {
   toast.info({
     component: ConfirmToast,
