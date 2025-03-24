@@ -41,6 +41,11 @@ php artisan migrate --seed
 php artisan serve  
 ```
 
+### Start the task scheduler:
+```bash
+php artisan schedule:work  
+```
+
 ## API Endpoints
 
 ### Authentication:
