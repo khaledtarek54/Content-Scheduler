@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\PlatformService;
 use Illuminate\Http\Request;
+use App\Services\PlatformService;
+use Illuminate\Routing\Controller;
 
 class PlatformController extends Controller
 {
@@ -22,5 +23,9 @@ class PlatformController extends Controller
     public function togglePlatform(Request $request, $platformId)
     {
         return response()->json($this->platformService->togglePlatform($platformId));
+    }
+    public function getSuggestedTime($platformId)
+    {
+        return response()->json($this->platformService->getSuggestedTime($platformId));
     }
 }

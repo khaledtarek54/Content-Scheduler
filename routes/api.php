@@ -1,13 +1,14 @@
 <?php
 
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PlatformController;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\PostPlatformController;
-use Illuminate\Support\Facades\File;
 
 
 Route::post('register', [AuthController::class, 'register']);
@@ -27,6 +28,10 @@ Route::middleware('auth:sanctum','throttle:api')->group(function () {
 
     Route::get('/platforms', [PlatformController::class, 'index']);
     Route::post('/platforms/{platformId}/toggle', [PlatformController::class, 'togglePlatform']);
+    Route::get('/suggested-time/{platformId}', [PlatformController::class, 'getSuggestedTime']);
 
     Route::post('/posts/{postId}/platforms', [PostPlatformController::class, 'attachPlatforms']);
+
+    Route::get('/analytics', [AnalyticsController::class, 'getPostAnalytics']);
+
 });

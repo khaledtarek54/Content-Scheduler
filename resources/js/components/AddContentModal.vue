@@ -32,15 +32,21 @@
                     </select>
                 </div>
                 <label class="block mt-3 mb-2 text-gray-700">Select Platforms</label>
-                <vue-multiselect v-model="platform" :options="platformOptions" :multiple="true" :close-on-select="false"
+                <vue-multiselect v-model="platform" :options="platformOptions" :multiple="false" :close-on-select="true"
                     placeholder="Select platforms" label="name" track-by="id" class="w-full"></vue-multiselect>
+
 
                 <div v-if="status.trim() === 'scheduled'">
                     <label class="block text-gray-700">Scheduled Time</label>
                     <input v-model="scheduled_time" type="datetime-local"
                         class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
-                </div>
 
+                </div>
+                <div v-if="platform && status.trim() === 'scheduled'">
+                    <button type="button" @click="fetchSuggestedTime" class="bg-green-500 text-white px-3 py-2 rounded">
+                        Suggest Time
+                    </button>
+                </div>
                 <div>
                     <label class="block text-gray-700">Upload Image</label>
                     <input type="file" @change="handleImageUpload" accept="image/*"
@@ -85,7 +91,7 @@ const scheduled_time = ref(null);
 const image = ref(null);
 const imagePreview = ref(null);
 const errors = ref({});
-const platform = ref([]);
+const platform = ref("");
 const platformOptions = [
     { id: 1, name: "Twitter" },
     { id: 2, name: "Instagram" },
@@ -93,6 +99,13 @@ const platformOptions = [
 ];
 
 const closeModal = () => {
+    title.value = "";
+    content.value = "";
+    status.value = "draft";
+    scheduled_time.value = "";
+    image.value = null;
+    imagePreview.value = null;
+    platform.value = "";
     emit("close");
 };
 
@@ -104,6 +117,13 @@ const handleImageUpload = (event) => {
     }
 };
 
+const fetchSuggestedTime = async () => {
+    const response = await axios.get(`/suggested-time/${platform.value.id}`);
+
+    const dateObj = new Date(response.data.suggested_time);
+    const formattedDate = dateObj.toISOString().slice(0, 16);
+    scheduled_time.value = formattedDate;
+};
 const submitContent = async () => {
     errors.value = {};
 
@@ -113,7 +133,7 @@ const submitContent = async () => {
         errors.value.scheduled_time = "Scheduled time is required";
     if (image.value && !image.value.type.startsWith("image/"))
         errors.value.image = "Invalid image format";
-    if (platform.value.length === 0) errors.value.platform = "Platform is required";
+    if (!platform.value) errors.value.platform = "Platform is required";
 
     if (Object.keys(errors.value).length > 0) return;
 
@@ -121,9 +141,8 @@ const submitContent = async () => {
     formData.append("title", title.value);
     formData.append("content", content.value);
     formData.append("status", status.value);
-    platform.value.forEach(platformItem => {
-        formData.append("platform[]", platformItem.id);
-    });
+    formData.append("platform[]", platform.value.id);
+
     if (status.value === "scheduled") {
         formData.append("scheduled_time", scheduled_time.value);
     }
@@ -144,7 +163,7 @@ const submitContent = async () => {
             scheduled_time.value = "";
             image.value = null;
             imagePreview.value = null;
-            platform.value = [];
+            platform.value = "";
             closeModal();
         });
     } catch (error) {
@@ -158,5 +177,6 @@ const submitContent = async () => {
             toast.error("An unexpected error occurred!");
         }
     }
+
 };
 </script>

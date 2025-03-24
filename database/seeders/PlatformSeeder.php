@@ -10,9 +10,9 @@ class PlatformSeeder extends Seeder
     public function run()
     {
         $platforms = [
-            ['name' => 'Twitter', 'type' => 'twitter'],
-            ['name' => 'Instagram', 'type' => 'instagram'],
-            ['name' => 'LinkedIn', 'type' => 'linkedin'],
+            ['name' => 'Twitter', 'peak_hour' => '18:00:00', 'type' => 'twitter'],
+            ['name' => 'Instagram', 'peak_hour' => '20:00:00', 'type' => 'instagram'],
+            ['name' => 'LinkedIn', 'peak_hour' => '09:00:00', 'type' => 'linkedin'],
         ];
 
         foreach ($platforms as $platform) {

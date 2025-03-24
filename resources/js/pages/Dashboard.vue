@@ -1,10 +1,11 @@
+
+
 <template>
   <div class="flex flex-col min-h-screen bg-gray-100">
     <!-- Navbar -->
     <nav class="bg-white shadow p-4 flex justify-between items-center">
       <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>
-      <button @click="logout"
-        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition">Logout</button>
+
     </nav>
 
     <div class="container mx-auto p-6">
@@ -34,30 +35,30 @@
         <table class="w-full border-collapse border">
           <thead>
             <tr class="bg-gray-100">
-              <th class="border p-3 text-left">Title</th>
-              <th class="border p-3 text-left">Status</th>
-              <th class="border p-2">Platforms</th>
-              <th class="border p-3 text-left">Scheduled Time</th>
-              <th class="border p-3 text-left">Actions</th>
+              <th class="border p-3 text-center">Title</th>
+              <th class="border p-3 text-center">Status</th>
+              <th class="border p-2 text-center">Platform</th>
+              <th class="border p-3 text-center">Scheduled Time</th>
+              <th class="border p-3 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="post in posts" :key="post.id" class="hover:bg-gray-50">
-              <td class="border p-3">{{ post.title }}</td>
-              <td class="border p-3">
+              <td class="border p-3 text-center">{{ post.title }}</td>
+              <td class="border p-3 text-center">
                 <span class="px-2 py-1 rounded text-white text-sm"
                   :class="post.status === 'scheduled' ? 'bg-yellow-500' : 'bg-green-500'">
                   {{ post.status }}
                 </span>
               </td>
-              <td class="border p-2">
+              <td class="border p-2 text-center">
                 <span v-for="platform in post.platforms" :key="platform.id"
                   class="px-2 py-1 bg-gray-200 text-gray-700 rounded mr-1 inline-block">
                   {{ platform.name }}
                 </span>
               </td>
-              <td class="border p-3">{{ post.scheduled_time }}</td>
-              <td class="border p-3">
+              <td class="border p-3 text-center">{{ post.scheduled_time }}</td>
+              <td class="border p-3 text-center">
                 <!-- <button class="text-blue-500 hover:underline mr-2" @click="editPost(post)">Edit</button> -->
                 <button class="text-red-500 hover:underline" @click="deletePost(post.id)">Delete</button>
               </td>
@@ -67,7 +68,6 @@
       </div>
     </div>
 
-    <!-- Add Content Modal -->
     <AddContentModal :isOpen="isModalOpen" @close="isModalOpen = false" @contentAdded="fetchPosts" />
   </div>
 </template>
@@ -77,9 +77,10 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../store/auth'
 import axios from 'axios'
-import AddContentModal from '../components/AddContentModal.vue'
+import AddContentModal from '@/components/AddContentModal.vue'
 import { useToast } from "vue-toastification";
 import ConfirmToast from "@/components/ConfirmToast.vue";
+
 const toast = useToast();
 const router = useRouter()
 const auth = useAuthStore()
