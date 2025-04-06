@@ -10,14 +10,8 @@ import { useAuthStore } from "./store/auth";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import "../css/app.css";
-import axios from "axios";
+import axiosInstance from "./axios";
 
-axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api";
-
-const token = localStorage.getItem("token");
-if (token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-}
 
 const routes = [
     { path: "/login", component: Login },
@@ -56,6 +50,7 @@ router.beforeEach((to, from, next) => {
 });
 
 const app = createApp(App);
+app.config.globalProperties.$axios = axiosInstance;
 app.use(Toast);
 app.use(router);
 app.use(createPinia());
