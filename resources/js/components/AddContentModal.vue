@@ -78,7 +78,7 @@
 import { ref, defineProps, defineEmits } from "vue";
 import VueMultiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.css";
-import axios from "axios";
+import axios from "axiosInstance";
 import { useToast } from "vue-toastification";
 const toast = useToast();
 const props = defineProps({ isOpen: Boolean });

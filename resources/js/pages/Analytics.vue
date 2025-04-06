@@ -32,7 +32,7 @@
   
   <script setup>
   import { ref, onMounted } from "vue";
-  import axios from "axios";
+  import axios from "axiosInstance";
   
   const analytics = ref({
     total_scheduled: 0,
