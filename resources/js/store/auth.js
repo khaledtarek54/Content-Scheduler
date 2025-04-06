@@ -18,6 +18,7 @@ export const useAuthStore = defineStore("auth", {
         },
 
         async register(userData) {
+            console.log("Using API base URL:", axios.defaults.baseURL);
             const response = await axios.post("/register", userData);
             this.token = response.data.token;
             this.user = response.data.user;
