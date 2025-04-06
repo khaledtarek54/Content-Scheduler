@@ -76,7 +76,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../store/auth'
-import axios from 'axios'
+import axios from '../axios'
 import AddContentModal from '@/components/AddContentModal.vue'
 import { useToast } from "vue-toastification";
 import ConfirmToast from "@/components/ConfirmToast.vue";

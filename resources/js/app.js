@@ -12,7 +12,6 @@ import "vue-toastification/dist/index.css";
 import "../css/app.css";
 import axios from "../js/axios";
 
-
 const routes = [
     { path: "/login", component: Login },
     { path: "/register", component: Register },
