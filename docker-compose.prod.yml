@@ -15,6 +15,8 @@ services:
       - laravel
     env_file:
       - .env
+    expose:
+      - "9000"
 
   webserver:
     image: nginx:alpine
