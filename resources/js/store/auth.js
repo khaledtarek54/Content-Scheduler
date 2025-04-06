@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import axios from "axiosInstance";
+import axios from "axios";
 
 export const useAuthStore = defineStore("auth", {
     state: () => ({
@@ -8,28 +8,28 @@ export const useAuthStore = defineStore("auth", {
     }),
     actions: {
         async login(credentials) {
-            const response = await axios.post("/login", credentials);
+            const response = await this.$axios.post("/login", credentials);
             this.token = response.data.token;
             this.user = response.data.user;
             localStorage.setItem("token", this.token);
-            axios.defaults.headers.common[
+            this.$axios.defaults.headers.common[
                 "Authorization"
             ] = `Bearer ${this.token}`;
         },
 
         async register(userData) {
-            const response = await axios.post("/register", userData);
+            const response = await this.$axios.post("/register", userData);
             this.token = response.data.token;
             this.user = response.data.user;
             localStorage.setItem("token", this.token);
-            axios.defaults.headers.common[
+            this.$axios.defaults.headers.common[
                 "Authorization"
             ] = `Bearer ${this.token}`;
         },
 
         async logout() {
             try {
-                await axios.post('/logout', {}, {
+                await this.$axios.post('/logout', {}, {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
             } catch (error) {
@@ -39,13 +39,13 @@ export const useAuthStore = defineStore("auth", {
             this.user = null
             this.token = null
             localStorage.removeItem('token')
-            delete axios.defaults.headers.common['Authorization']
+            delete this.$axios.defaults.headers.common['Authorization']
         },
 
         async fetchUser() {
             if (!this.token) return;
             try {
-                const response = await axios.get("/profile");
+                const response = await this.$axios.get("/profile");
                 this.user = response.data;
             } catch {
                 this.logout();

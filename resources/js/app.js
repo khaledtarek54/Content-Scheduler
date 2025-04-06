@@ -10,7 +10,7 @@ import { useAuthStore } from "./store/auth";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import "../css/app.css";
-import axiosInstance from "./axios";
+import axios from "./axios";
 
 
 const routes = [
@@ -50,7 +50,7 @@ router.beforeEach((to, from, next) => {
 });
 
 const app = createApp(App);
-app.config.globalProperties.$axios = axiosInstance;
+app.config.globalProperties.$axios = axios;
 app.use(Toast);
 app.use(router);
 app.use(createPinia());
