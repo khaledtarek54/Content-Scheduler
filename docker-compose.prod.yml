@@ -13,6 +13,7 @@ services:
     volumes:
       - ./:/var/www
       - /var/www/vendor
+      - /var/www/node_modules
     networks:
       - laravel
     env_file:
