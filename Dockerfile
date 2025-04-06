@@ -35,4 +35,6 @@ RUN composer install --no-dev --optimize-autoloader
 RUN npm install && npm run build
 
 # Set permissions for Laravel
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN composer dump-autoload --optimize && \
+    composer run-script post-autoload-dump && \
+    chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
