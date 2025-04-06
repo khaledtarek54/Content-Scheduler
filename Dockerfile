@@ -21,27 +21,30 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Create a non-root user
+# Create application user
 RUN groupadd -g 1000 www && \
     useradd -u 1000 -ms /bin/bash -g www www
 
 # Set working directory
 WORKDIR /var/www
 
-# Copy files with proper ownership
+# Copy files with proper permissions
 COPY --chown=www:www . .
 
-# Install Node.js dependencies as root
+# Install dependencies
+RUN mkdir -p /var/www/storage/framework/{cache,sessions,views} /var/www/storage/logs && \
+    chown -R www:www /var/www/storage /var/www/bootstrap/cache && \
+    chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
+# Install Node.js dependencies
 RUN npm install && \
     npm run build && \
-    chown -R www:www node_modules
+    chown -R www:www /var/www/public/build /var/www/node_modules
 
 # Install Composer dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Switch to non-root user
+# Switch to application user
 USER www
 
-# Expose port 9000 and start php-fpm server
-EXPOSE 9000
 CMD ["php-fpm"]

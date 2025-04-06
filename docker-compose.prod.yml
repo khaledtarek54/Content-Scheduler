@@ -8,7 +8,7 @@ services:
     image: laravel-app
     container_name: laravel_app
     restart: unless-stopped
-    user: "www-data"
+    user: "www"
     working_dir: /var/www
     volumes:
       - ./:/var/www
