@@ -10,7 +10,7 @@ import { useAuthStore } from "./store/auth";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import "../css/app.css";
-import axios from "./axios";
+import axios from "../js/axios";
 
 
 const routes = [
