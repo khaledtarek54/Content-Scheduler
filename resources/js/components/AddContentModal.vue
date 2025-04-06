@@ -78,7 +78,7 @@
 import { ref, defineProps, defineEmits } from "vue";
 import VueMultiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.css";
-import axios from "axios";
+import axios from "../axios";
 import { useToast } from "vue-toastification";
 const toast = useToast();
 const props = defineProps({ isOpen: Boolean });
@@ -118,7 +118,7 @@ const handleImageUpload = (event) => {
 };
 
 const fetchSuggestedTime = async () => {
-    const response = await this.$axios.get(`/suggested-time/${platform.value.id}`);
+    const response = await axios.get(`/suggested-time/${platform.value.id}`);
 
     const dateObj = new Date(response.data.suggested_time);
     const formattedDate = dateObj.toISOString().slice(0, 16);
@@ -151,7 +151,7 @@ const submitContent = async () => {
     }
 
     try {
-        await this.$axios.post("/posts", formData, {
+        await axios.post("/posts", formData, {
             headers: { "Content-Type": "multipart/form-data" },
         }).then(() => {
             toast.success("Content added successfully!");

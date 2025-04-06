@@ -32,7 +32,7 @@
   
   <script setup>
   import { ref, onMounted } from "vue";
-  import axios from "axios";
+  import axios from "../axios";
   
   const analytics = ref({
     total_scheduled: 0,
@@ -43,7 +43,7 @@
   
   const fetchAnalytics = async () => {
     try {
-      const response = await this.$axios.get("/analytics");
+      const response = await axios.get("/analytics");
       analytics.value = response.data;
     } catch (error) {
       console.error("Failed to load analytics", error);
