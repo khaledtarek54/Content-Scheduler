@@ -25,6 +25,11 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Create cache and storage directories with proper permissions
+RUN mkdir -p /var/www/storage/framework/{cache,sessions,views} /var/www/storage/logs /var/www/bootstrap/cache && \
+    chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && \
+    chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
 # Copy the existing application directory contents
 COPY . .
 
