@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: laravel-app
+    image: khaledtarek54/content-scheduler:latest
     container_name: content_scheduler_app
     restart: unless-stopped
     working_dir: /var/www
