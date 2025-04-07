@@ -40,7 +40,7 @@ jobs:
 
     - name: Build Docker image using docker-compose.prod.yml
       run: |
-        docker-compose -f docker-compose.prod.yml build
+        docker compose -f docker-compose.prod.yml build
         docker tag laravel-app ${{ secrets.DOCKER_USERNAME }}/content-scheduler:latest
 
     - name: Push Docker image to Docker Hub
