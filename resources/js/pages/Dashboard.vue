@@ -4,7 +4,7 @@
   <div class="flex flex-col min-h-screen bg-gray-100">
     <!-- Navbar -->
     <nav class="bg-white shadow p-4 flex justify-between items-center">
-      <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>
+      <h1 class="text-3xl font-bold text-gray-800">Dashboard!!</h1>
 
     </nav>
 
