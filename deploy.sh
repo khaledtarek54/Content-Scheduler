@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "working in deploy.sh inside project"
 # Set the image name
 IMAGE_NAME="khaledtarek54/content-scheduler:latest"
 
