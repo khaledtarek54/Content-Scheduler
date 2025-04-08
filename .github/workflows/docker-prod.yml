@@ -23,4 +23,5 @@ jobs:
       # SSH into EC2 and run deploy.sh
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_IP }} 'bash -s' < ./deploy.sh
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_IP }} 'bash /home/ubuntu/deploy.sh'
+
