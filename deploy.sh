@@ -23,7 +23,7 @@ docker-compose -f docker-compose.deploy.yml run --rm app composer install --no-i
 
 # Run npm install and npm run build for frontend assets
 docker-compose -f docker-compose.deploy.yml run --rm app npm install
-docker-compose -f docker-compose.deploy.yml run --rm app npm run build
+docker-compose -f docker-compose.deploy.yml run --rm app npm run build --no-warnings
 
 # Run the containers again
 echo "Running the new containers..."
